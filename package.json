@@ -2,17 +2,20 @@
   "name": "music-shop-api",
   "version": "0.0.0",
   "description": "This is a node js api for a music store",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "type": "module",
   "keywords": [
     "NodeJS",
     "Demo",
     "API"
   ],
   "author": "Praveen <admin@admin.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0"
+  }
 }
