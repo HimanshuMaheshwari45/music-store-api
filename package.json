@@ -13,11 +13,12 @@
   "type": "module",
   "scripts": {
     "start": "nodemon index.js",
-    "cli": "nodemon ./cli/index.js",
+    "cli": "node ./cli/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "chalk": "^5.3.0"
+    "chalk": "^5.3.0",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
