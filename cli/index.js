@@ -2,10 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers"
-
-const filepath = "phonebook.json";
-
-
+import { addContact, listContacts } from "../shared/phonebook.js"
 
 const argv = yargs(hideBin(process.argv))
     .command('add', "Add new contact", {
@@ -31,7 +28,12 @@ async function run() {
     if (argv._.includes('add')) {
         await addContact(argv.name, argv.number)
     } else if (argv._.includes('list')) {
-        await listContacts();
+        const contacts = await listContacts();
+        if (contacts) {
+            contacts.forEach(contact => {
+                console.log(contact)
+            });
+        }
     } else {
         console.log("Invalid command")
     }
