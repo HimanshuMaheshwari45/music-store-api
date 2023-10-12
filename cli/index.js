@@ -5,34 +5,7 @@ import { hideBin } from "yargs/helpers"
 
 const filepath = "phonebook.json";
 
-async function addContact(name, phoneNumber) {
 
-    let contacts = []
-    try {
-        const filedata = await fs.readFile(filepath, 'utf8')
-        contacts = JSON.parse(filedata);
-    } catch (error) {
-        console.log("phonbook file didn't exists.")
-    }
-
-    contacts.push({ name, phoneNumber })
-    await fs.writeFile(filepath, JSON.stringify(contacts));
-
-    console.log("New contact added.")
-
-}
-
-async function listContacts() {
-    try {
-        const filedata = await fs.readFile(filepath, 'utf8');
-        const data = JSON.parse(filedata);
-        data.forEach((contact, index) => {
-            console.log(`#${index + 1}. ${contact.name} - ${contact.phoneNumber}`)
-        });
-    } catch (error) {
-        console.log("No Contacts");
-    }
-}
 
 const argv = yargs(hideBin(process.argv))
     .command('add', "Add new contact", {
