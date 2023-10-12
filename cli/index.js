@@ -24,14 +24,26 @@ async function addContact() {
 
 }
 
+async function listContacts() {
+    try {
+        const filedata = await fs.readFile(filepath, 'utf8');
+        const data = JSON.parse(filedata);
+        data.forEach((contact, index) => {
+            console.log(`#${index + 1}. ${contact.name} - ${contact.phoneNumber}`)
+        });
+    } catch (error) {
+        console.log("No Contacts");
+    }
+}
+
 
 switch (cmd) {
     case "add":
         addContact()
         break;
 
-    case "search":
-
+    case "list":
+        listContacts();
         break;
 
     default:
