@@ -1,7 +1,9 @@
 import express from "express";
-import { addContact, listContacts } from "../shared/phonebook.js";;
-
+import { addContact, listContacts } from "../shared/phonebook.js";
+import dotenv from "dotenv";
 import * as PeopleController from "./controller/people.js"
+
+dotenv.config();
 
 const app = express();
 const port = 4000;
