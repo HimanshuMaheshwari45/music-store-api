@@ -1,12 +1,17 @@
 import express from "express";
-import { addContact, listContacts } from "../shared/phonebook.js";
 import dotenv from "dotenv";
+import ejs from "ejs";
+import path from "path";
 import * as PeopleController from "./controller/people.js"
+import { addContact, listContacts } from "../shared/phonebook.js";
 
 dotenv.config();
 
 const app = express();
 const port = 4000;
+
+app.set('view engine', 'ejs');
+app.set("views", path.join(process.cwd(), "server/views"))
 
 app.use(express.json());
 
