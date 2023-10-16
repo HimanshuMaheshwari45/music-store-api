@@ -27,8 +27,16 @@ app.post("/add", async (req, res) => {
   res.json(data);
 });
 
-app.get("/people", PeopleController.getPeople);
+// CRUD = CREATE READ UPDATE DELETE
+// CREATE
 app.post("/people", PeopleController.addPerson);
+// READ
+app.get("/people", PeopleController.getPeople);
+app.get("/people/:id", PeopleController.getPerson);
+// UPDATE
+app.put("/people/:id", PeopleController.updatePerson)
+// DELETE
+app.delete("/people/:id", PeopleController.deletePerson)
 
 app.listen(port, () => {
   console.log(`Application server started at: http://localhost:${port}`);
