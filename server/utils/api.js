@@ -1,5 +1,5 @@
 export class APIResponse {
-    data;
+  data;
   message;
   statusCode;
   res;
@@ -18,11 +18,20 @@ export class APIResponse {
 }
 
 export class APIError {
-  data;
-  message;
-  constructor(res, data, message, statusCode = 500) {
-    this.data = data;
-    this.message = message;
-    res.status(statusCode).json({ data, message });
-  }
+    data;
+    message;
+    statusCode;
+    res;
+    constructor(res, data, message, statusCode = 500) {
+      this.data = data;
+      this.message = message;
+      this.res = res;
+      this.statusCode = statusCode;
+    }
+  
+    json() {
+      this.res
+        .status(this.statusCode)
+        .json({ data: this.data, message: this.message });
+    }
 }
