@@ -3,35 +3,35 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { PeopleModel } from "../schema/people.js";
+import { APIError, APIResponse } from "../utils/api.js";
 
 const { API_BASE_URL } = process.env;
 
 export async function getPeople(req, res) {
   try {
     const people = await PeopleModel.find();
-    res.json(people);
+    new APIResponse(res, people, "This is the data for all users").json();
   } catch (error) {}
 }
 
 export async function getPerson(req, res) {
+  const { params } = req;
+  const { id } = params;
 
-    const { params } = req;
-    const { id } = params;
-
-    try {
-      const people = await PeopleModel.findById(id);
-      res.json(people);
-    } catch (error) {}
-  }
+  try {
+    const people = await PeopleModel.findById(id);
+    new APIResponse(res, people, "This is the data for all users").json();
+  } catch (error) {}
+}
 
 export async function addPerson(req, res) {
   try {
     const { body } = req;
     const newPerson = new PeopleModel(body);
     await newPerson.save();
-    res.json({ message: "new user added." });
+    res.json(new APIResponse(null, "User added successfully"));
   } catch {
-    res.json({ message: "unable to save user." });
+    res.json(new APIError(null, "Error adding user data"));
   }
 }
 
