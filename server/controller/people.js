@@ -4,6 +4,7 @@ dotenv.config();
 
 import { PeopleModel } from "../schema/people.js";
 import { APIError, APIResponse } from "../utils/api.js";
+import { validationResult } from "express-validator";
 
 const { API_BASE_URL } = process.env;
 
@@ -25,11 +26,14 @@ export async function getPerson(req, res) {
 }
 
 export async function addPerson(req, res) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    new APIError(res, errors.array(), "Error saving new user").json();
+  }
+
   try {
     const { body } = req;
-
-    // Validate body content and fail if not valid
-
     const newPerson = new PeopleModel(body);
     await newPerson.save();
     new APIResponse(res, null, "User added successfully").json();
