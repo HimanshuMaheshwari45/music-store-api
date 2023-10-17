@@ -27,11 +27,14 @@ export async function getPerson(req, res) {
 export async function addPerson(req, res) {
   try {
     const { body } = req;
+
+    // Validate body content and fail if not valid
+
     const newPerson = new PeopleModel(body);
     await newPerson.save();
-    res.json(new APIResponse(null, "User added successfully"));
-  } catch {
-    res.json(new APIError(null, "Error adding user data"));
+    new APIResponse(res, null, "User added successfully").json();
+  } catch (error) {
+    new APIError(res, error.message, "Error adding user data").json();
   }
 }
 

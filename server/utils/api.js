@@ -22,6 +22,7 @@ export class APIError {
     message;
     statusCode;
     res;
+    
     constructor(res, data, message, statusCode = 500) {
       this.data = data;
       this.message = message;
