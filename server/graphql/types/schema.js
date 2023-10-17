@@ -2,6 +2,7 @@ import {} from "@apollo/server";
 
 export const Schema = `#graphql
     type Person {
+        _id: String
         id: Int
         name: String
         username:String
@@ -11,6 +12,6 @@ export const Schema = `#graphql
     }
 
     type Query {
-        people : [Person]
+        people(sort: String) : [Person]
     }
 `;
