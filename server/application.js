@@ -1,9 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
-import ejs from "ejs";
 import path from "path";
-import * as PeopleController from "./controller/people.js";
 import { addContact, listContacts } from "../shared/phonebook.js";
+import PeopleRoute from "./router/people.js"
 import "./db.js";
 
 dotenv.config();
@@ -16,6 +15,8 @@ app.set("views", path.join(process.cwd(), "server/views"));
 
 app.use(express.json());
 
+app.use("/people", PeopleRoute);
+
 app.get("/list", async (req, res) => {
   const data = await listContacts();
   res.json(data);
@@ -27,16 +28,7 @@ app.post("/add", async (req, res) => {
   res.json(data);
 });
 
-// CRUD = CREATE READ UPDATE DELETE
-// CREATE
-app.post("/people", PeopleController.addPerson);
-// READ
-app.get("/people", PeopleController.getPeople);
-app.get("/people/:id", PeopleController.getPerson);
-// UPDATE
-app.put("/people/:id", PeopleController.updatePerson)
-// DELETE
-app.delete("/people/:id", PeopleController.deletePerson)
+
 
 app.listen(port, () => {
   console.log(`Application server started at: http://localhost:${port}`);

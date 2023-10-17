@@ -1,0 +1,29 @@
+[
+    {
+        "id" : 1,
+        "name" : "Project 1"
+    }
+]
+
+// localhost/project/:id
+
+// localhost/employeeDetails 
+
+const employees = await axios("localhost:4000/employee/:id");
+const combinedAPICall = [];
+
+employees.forEach((employee)=>{
+    const { projectID } = employee;
+    const request = axios.get(`localhost:4000/project/${projectID}`);
+    combinedAPICall.push(request);
+})
+
+const dataForAllProjects = await promise.AllSettled(combinedAPICall);
+
+const combinedEmployeeData = []
+
+employees.forEach((employee, index)=>{
+    combinedEmployeeData.push({ ...employee, ...dataForAllProjects[index] })
+})
+
+res.json(combinedEmployeeData);
