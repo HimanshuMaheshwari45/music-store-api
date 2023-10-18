@@ -11,6 +11,8 @@ import PeopleRoute from "./router/people.js";
 import "./db.js";
 import { Schema } from "./graphql/types/schema.js";
 import Resolvers from "./graphql/resolvers/index.js";
+import { ProductModel } from "./schema/products.js";
+import ProductRoute from "./router/product.js";
 
 dotenv.config();
 
@@ -33,6 +35,8 @@ app.use(express.json());
 await server.start();
 
 app.use("/people", PeopleRoute);
+app.use("/product", ProductRoute);
+
 
 app.get("/list", async (req, res) => {
   const data = await listContacts();

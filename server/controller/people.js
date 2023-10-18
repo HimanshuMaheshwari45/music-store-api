@@ -65,3 +65,21 @@ export async function updatePerson(req, res) {
     res.json({ message: "unable to update record." });
   }
 }
+
+export async function findCountByRating(req, res) {
+  try {
+    const { params, body } = req;
+    const { rating } = params;
+
+    console.log(rating);
+
+    const result = await PeopleModel.find({ rating: { $lte: rating } }).count();
+    new APIResponse(
+      res,
+      { count: result },
+      "Count of people based on rating"
+    ).json();
+  } catch (error) {
+    res.json({ message: "unable to update record." });
+  }
+}

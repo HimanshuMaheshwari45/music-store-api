@@ -24,6 +24,7 @@ const PeopleSchema = new Schema({
     catchPhrase: String,
     bs: String,
   },
+  rating : Number
 });
 
 const PeopleModel = model("people", PeopleSchema, "people");
