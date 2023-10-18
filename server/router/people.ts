@@ -1,6 +1,6 @@
 import { Router } from "express";
-import * as PeopleController from "../controller/people.js";
-import { addPersonValidator } from "../validator/people.js";
+import * as PeopleController from "../controller/people";
+import { addPersonValidator } from "../validator/people";
 
 const PeopleRoute = Router();
 

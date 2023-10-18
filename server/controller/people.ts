@@ -2,8 +2,8 @@ import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
 
-import { PeopleModel } from "../schema/people.js";
-import { APIError, APIResponse } from "../utils/api.js";
+import { PeopleModel } from "../schema/people";
+import { APIError, APIResponse } from "../utils/api";
 import { validationResult } from "express-validator";
 
 const { API_BASE_URL } = process.env;
@@ -37,7 +37,7 @@ export async function addPerson(req, res) {
     const newPerson = new PeopleModel(body);
     await newPerson.save();
     new APIResponse(res, null, "User added successfully").json();
-  } catch (error) {
+  } catch (error: any) {
     new APIError(res, error.message, "Error adding user data").json();
   }
 }

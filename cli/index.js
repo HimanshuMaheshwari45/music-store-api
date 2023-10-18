@@ -2,7 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers"
-import { addContact, listContacts } from "../shared/phonebook.js"
+import { addContact, listContacts } from "../shared/phonebook
 
 const argv = yargs(hideBin(process.argv))
     .command('add', "Add new contact", {

@@ -1,4 +1,4 @@
-import { GetPeople } from "./people.js";
+import { GetPeople } from "./people";
 
 export default {
   Query: {

@@ -10,12 +10,11 @@
   "author": "Praveen <admin@admin.com>",
   "license": "MIT",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "nodemon index.js",
     "cli": "node ./cli/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon ./server/application.js",
+    "server": "nodemon",
     "graphql": "nodemon ./server/graphql/server.js"
   },
   "dependencies": {
@@ -31,6 +30,10 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "@types/express": "^4.17.20",
+    "@types/node": "^20.8.6",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   }
 }

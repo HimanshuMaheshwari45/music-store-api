@@ -1,5 +1,5 @@
-import { PeopleModel } from "../../schema/people.js";
-import "../../db.js";
+import { PeopleModel } from "../../schema/people";
+import "../../db";
 
 export async function GetPeople(context, args) {
   console.log(args);

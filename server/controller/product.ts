@@ -1,5 +1,5 @@
-import { ProductModel } from "../schema/products.js";
-import { APIResponse } from "../utils/api.js";
+import { ProductModel } from "../schema/products";
+import { APIResponse } from "../utils/api";
 
 export async function averagePrices(req, res) {
   try {

@@ -1,3 +1,6 @@
 {
-    "ext" : "js, mjs, ts"
+    "watch" : ["server/"],
+    "ext" : ".ts, .js",
+    "ignore" : [],
+    "exec" : "ts-node ./server/application.ts"
 }
