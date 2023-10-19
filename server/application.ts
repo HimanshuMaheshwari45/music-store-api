@@ -14,6 +14,7 @@ import Resolvers from "./graphql/resolvers/index";
 import { ProductModel } from "./schema/products";
 import ProductRoute from "./router/product";
 import UserRoute from "./router/user";
+import { logging } from "./middleware/logging";
 
 dotenv.config();
 
@@ -36,10 +37,11 @@ async function main() {
 
   await server.start();
 
+  app.use(logging);
+
   app.use("/people", PeopleRoute);
   app.use("/product", ProductRoute);
   app.use("/user", UserRoute);
-
   app.get("/list", async (req, res) => {
     const data = await listContacts();
     res.json(data);
