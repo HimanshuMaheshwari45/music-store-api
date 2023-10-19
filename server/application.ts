@@ -13,6 +13,7 @@ import { Schema } from "./graphql/types/schema";
 import Resolvers from "./graphql/resolvers/index";
 import { ProductModel } from "./schema/products";
 import ProductRoute from "./router/product";
+import UserRoute from "./router/user";
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ async function main() {
 
   app.use("/people", PeopleRoute);
   app.use("/product", ProductRoute);
+  app.use("/user", UserRoute);
 
   app.get("/list", async (req, res) => {
     const data = await listContacts();
@@ -54,4 +56,4 @@ async function main() {
   httpServer.listen(port);
 }
 
-main()
+main();
