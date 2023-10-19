@@ -1,3 +1,3 @@
 import { connect } from "mongoose";
 
-connect("mongodb://localhost:27017/demodatabase");
+connect("mongodb://127.0.0.1:27017/demodatabase");

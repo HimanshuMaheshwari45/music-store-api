@@ -9,6 +9,9 @@ import { validationResult } from "express-validator";
 const { API_BASE_URL } = process.env;
 
 export async function getPeople(req, res) {
+
+  console.log(req.user);
+
   try {
     const people = await PeopleModel.find();
     new APIResponse(res, people, "This is the data for all users").json();

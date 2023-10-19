@@ -44,6 +44,7 @@ export async function register(req, res) {
     const user = await newUser.save();
     new APIResponse(res, {}, "New user created.").json();
   } catch (error) {
+    console.log(error);
     new APIError(res, {}, "Error creating new user.").json();
   }
 }
