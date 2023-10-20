@@ -4,8 +4,9 @@ import path from "path";
 import http from "http";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
-
 import { ApolloServer } from "@apollo/server";
+import cors from "cors"
+
 import { addContact, listContacts } from "../shared/phonebook";
 import PeopleRoute from "./router/people";
 import "./db";
@@ -33,11 +34,13 @@ async function main() {
   app.set("view engine", "ejs");
   app.set("views", path.join(process.cwd(), "server/views"));
 
+  app.use(cors( ));
   app.use(express.json());
 
   await server.start();
 
   app.use(logging);
+
 
   app.use("/people", PeopleRoute);
   app.use("/product", ProductRoute);
