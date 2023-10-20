@@ -5,7 +5,7 @@ import http from "http";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import { ApolloServer } from "@apollo/server";
-import cors from "cors"
+import cors from "cors";
 
 import { addContact, listContacts } from "../shared/phonebook";
 import PeopleRoute from "./router/people";
@@ -16,6 +16,8 @@ import { ProductModel } from "./schema/products";
 import ProductRoute from "./router/product";
 import UserRoute from "./router/user";
 import { logging } from "./middleware/logging";
+import { Server as SocketIOServer } from "socket.io";
+import { IOHandler } from "./socketio/handler";
 
 dotenv.config();
 
@@ -24,6 +26,14 @@ async function main() {
   const port = 4000;
 
   const httpServer = http.createServer(app);
+
+  const io = new SocketIOServer(httpServer, {
+    cors: {
+      origin: "*",
+    },
+  });
+
+  IOHandler(io)
 
   const server = new ApolloServer({
     typeDefs: Schema,
@@ -34,13 +44,12 @@ async function main() {
   app.set("view engine", "ejs");
   app.set("views", path.join(process.cwd(), "server/views"));
 
-  app.use(cors( ));
+  app.use(cors());
   app.use(express.json());
 
   await server.start();
 
   app.use(logging);
-
 
   app.use("/people", PeopleRoute);
   app.use("/product", ProductRoute);
