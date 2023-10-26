@@ -13,7 +13,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "cli": "node ./cli/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha -r ts-node/register 'test/**/*.spec.ts'",
     "dev": "nodemon",
     "build": "tsc",
     "graphql": "nodemon ./server/graphql/server.js",
@@ -36,8 +36,12 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.9",
     "@types/express": "^4.17.20",
+    "@types/mocha": "^10.0.3",
     "@types/node": "^20.8.6",
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"

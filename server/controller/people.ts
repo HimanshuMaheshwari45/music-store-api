@@ -8,7 +8,13 @@ import { validationResult } from "express-validator";
 
 const { API_BASE_URL } = process.env;
 
+const assert = require("assert");
+
 export async function getPeople(req, res) {
+
+
+  assert.equal(true, false, "Error message");
+
   try {
     const people = await PeopleModel.find();
     new APIResponse(res, people, "This is the data for all users").json();
@@ -34,6 +40,9 @@ export async function addPerson(req, res) {
 
   try {
     const { body } = req;
+
+    assert(body).to
+
     const newPerson = new PeopleModel(body);
     await newPerson.save();
     new APIResponse(res, null, "User added successfully").json();
@@ -68,10 +77,10 @@ export async function updatePerson(req, res) {
 
 export async function findCountByRating(req, res) {
   try {
+
+
     const { params, body } = req;
     const { rating } = params;
-
-    console.log(rating);
 
     const result = await PeopleModel.find({ rating: { $lte: rating } }).count();
     new APIResponse(
