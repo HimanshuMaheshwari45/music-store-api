@@ -11,10 +11,6 @@ const { API_BASE_URL } = process.env;
 const assert = require("assert");
 
 export async function getPeople(req, res) {
-
-
-  assert.equal(true, false, "Error message");
-
   try {
     const people = await PeopleModel.find();
     new APIResponse(res, people, "This is the data for all users").json();
