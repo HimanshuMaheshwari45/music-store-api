@@ -13,6 +13,7 @@ const assert = require("assert");
 export async function getPeople(req, res) {
   try {
     const people = await PeopleModel.find();
+    console.log(people);
     new APIResponse(res, people, "This is the data for all users").json();
   } catch (error) {}
 }

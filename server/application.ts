@@ -21,8 +21,10 @@ import { IOHandler } from "./socketio/handler";
 
 dotenv.config();
 
+export let app;
+
 async function main() {
-  const app = express();
+   app = express();
   const port = 4000;
 
   const httpServer = http.createServer(app);

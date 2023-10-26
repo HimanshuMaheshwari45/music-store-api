@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as PeopleController from "../controller/people";
 import { addPersonValidator } from "../validator/people";
-import { AuthLogin } from "../middleware/auth";
+import * as AuthMiddleware from "../middleware/auth";
 import { IsAdminUser } from "../middleware/is-admin";
 
 const PeopleRoute = Router();
@@ -14,23 +14,28 @@ const PeopleRoute = Router();
 
 PeopleRoute.post(
   "/",
-  AuthLogin,
+  AuthMiddleware.AuthLogin,
   IsAdminUser,
   addPersonValidator,
   PeopleController.addPerson
 );
-PeopleRoute.get("/", AuthLogin, PeopleController.getPeople);
-PeopleRoute.get("/:id", AuthLogin, PeopleController.getPerson);
-PeopleRoute.put("/:id", AuthLogin, IsAdminUser, PeopleController.updatePerson);
+PeopleRoute.get("/", AuthMiddleware.AuthLogin, PeopleController.getPeople);
+PeopleRoute.get("/:id", AuthMiddleware.AuthLogin, PeopleController.getPerson);
+PeopleRoute.put(
+  "/:id",
+  AuthMiddleware.AuthLogin,
+  IsAdminUser,
+  PeopleController.updatePerson
+);
 PeopleRoute.delete(
   "/:id",
-  AuthLogin,
+  AuthMiddleware.AuthLogin,
   IsAdminUser,
   PeopleController.deletePerson
 );
 PeopleRoute.get(
   "/count/:rating",
-  AuthLogin,
+  AuthMiddleware.AuthLogin,
   PeopleController.findCountByRating
 );
 

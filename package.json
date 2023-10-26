@@ -42,6 +42,7 @@
     "@types/node": "^20.8.6",
     "@types/sinon": "^10.0.20",
     "chai": "^4.3.10",
+    "chai-http": "^4.4.0",
     "mocha": "^10.2.0",
     "nodemon": "^3.0.1",
     "sinon": "^17.0.0",
