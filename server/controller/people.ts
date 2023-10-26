@@ -40,9 +40,6 @@ export async function addPerson(req, res) {
 
   try {
     const { body } = req;
-
-    assert(body).to
-
     const newPerson = new PeopleModel(body);
     await newPerson.save();
     new APIResponse(res, null, "User added successfully").json();
