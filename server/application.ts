@@ -25,7 +25,7 @@ export let app;
 
 async function main() {
   app = express();
-  const port = process.env.PORT || 4000;
+  const port = process.env.PORT || 4600;
 
   const httpServer = http.createServer(app);
 
