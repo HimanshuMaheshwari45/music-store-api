@@ -1,3 +1,9 @@
 import { connect } from "mongoose";
 
-connect("mongodb://127.0.0.1:27017/demodatabase");
+const server = process.env.MONGO_SERVER;
+console.log(process.env);
+const serverPath = `mongodb://${server}/demodatabase`
+
+console.log(`MongoDB Server: ${serverPath}`)
+
+connect(serverPath);

@@ -26,15 +26,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const PeopleController = __importStar(require("../controller/people"));
 const people_1 = require("../validator/people");
+const AuthMiddleware = __importStar(require("../middleware/auth"));
+const is_admin_1 = require("../middleware/is-admin");
 const PeopleRoute = (0, express_1.Router)();
 // CRUD = CREATE READ UPDATE DELETE
 // parent = "/people"
 // router = /:id
 // ==  /people/:id
-PeopleRoute.post("/", people_1.addPersonValidator, PeopleController.addPerson);
-PeopleRoute.get("/", PeopleController.getPeople);
-PeopleRoute.get("/:id", PeopleController.getPerson);
-PeopleRoute.put("/:id", PeopleController.updatePerson);
-PeopleRoute.delete("/:id", PeopleController.deletePerson);
-PeopleRoute.get("/count/:rating", PeopleController.findCountByRating);
+PeopleRoute.post("/", AuthMiddleware.AuthLogin, is_admin_1.IsAdminUser, people_1.addPersonValidator, PeopleController.addPerson);
+PeopleRoute.get("/", AuthMiddleware.AuthLogin, PeopleController.getPeople);
+PeopleRoute.get("/:id", AuthMiddleware.AuthLogin, PeopleController.getPerson);
+PeopleRoute.put("/:id", AuthMiddleware.AuthLogin, is_admin_1.IsAdminUser, PeopleController.updatePerson);
+PeopleRoute.delete("/:id", AuthMiddleware.AuthLogin, is_admin_1.IsAdminUser, PeopleController.deletePerson);
+PeopleRoute.get("/count/:rating", AuthMiddleware.AuthLogin, PeopleController.findCountByRating);
 exports.default = PeopleRoute;

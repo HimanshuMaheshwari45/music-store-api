@@ -10,9 +10,11 @@ const people_1 = require("../schema/people");
 const api_1 = require("../utils/api");
 const express_validator_1 = require("express-validator");
 const { API_BASE_URL } = process.env;
+const assert = require("assert");
 async function getPeople(req, res) {
     try {
         const people = await people_1.PeopleModel.find();
+        console.log(people);
         new api_1.APIResponse(res, people, "This is the data for all users").json();
     }
     catch (error) { }
@@ -72,7 +74,6 @@ async function findCountByRating(req, res) {
     try {
         const { params, body } = req;
         const { rating } = params;
-        console.log(rating);
         const result = await people_1.PeopleModel.find({ rating: { $lte: rating } }).count();
         new api_1.APIResponse(res, { count: result }, "Count of people based on rating").json();
     }

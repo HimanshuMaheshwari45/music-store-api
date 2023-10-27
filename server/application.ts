@@ -24,8 +24,8 @@ dotenv.config();
 export let app;
 
 async function main() {
-   app = express();
-  const port = 4000;
+  app = express();
+  const port = process.env.PORT || 4000;
 
   const httpServer = http.createServer(app);
 
@@ -35,7 +35,7 @@ async function main() {
     },
   });
 
-  IOHandler(io)
+  IOHandler(io);
 
   const server = new ApolloServer({
     typeDefs: Schema,
@@ -52,6 +52,10 @@ async function main() {
   await server.start();
 
   app.use(logging);
+
+  app.use("/", (req, res) => {
+    res.send("this is the node js server.");
+  });
 
   app.use("/people", PeopleRoute);
   app.use("/product", ProductRoute);
